@@ -1,14 +1,16 @@
 import { AddTaskModel } from "@/components/module/AddTaskModel";
 import TaskCard from "@/components/module/tasks/TaskCard";
-import { selectFilter, selectTasks } from "@/redux/features/task/taskSlice";
+import {
+  /*selectFilter ,*/ selectTasks,
+} from "@/redux/features/task/taskSlice";
 import { useAppSelector } from "@/redux/hooks";
 
 const Tasks = () => {
   const tasks = useAppSelector(selectTasks);
-  const filter = useAppSelector(selectFilter);
+  // const filter = useAppSelector(selectFilter);
 
-  console.log(tasks);
-  console.log(filter);
+  // console.log(tasks);
+  // console.log(filter);
 
   return (
     <div className=" mx-auto max-w-7xl px-5 mt-20">
