@@ -10,7 +10,12 @@ const Router = createBrowserRouter([
     Component: App,
     children: [
       {
-        path: "",
+        // path: "",
+        index: true,
+        Component: Tasks,
+      },
+      {
+        path: "tasks",
         Component: Tasks,
       },
       {
