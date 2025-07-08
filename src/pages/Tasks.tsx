@@ -55,7 +55,7 @@ const Tasks = () => {
           <TabsContent value="password">Change your password here.</TabsContent> */}
         </Tabs>
       </div>
-      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className=" grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {tasks?.map((task) => (
           <TaskCard key={task?.id} task={task}></TaskCard>
         ))}

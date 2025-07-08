@@ -4,7 +4,8 @@ import {
   deleteTask,
   toggleCompletedState,
 } from "@/redux/features/task/taskSlice";
-import { useAppDispatch } from "@/redux/hooks";
+import { selectUsers } from "@/redux/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import type { ITask } from "@/types";
 import { IconTrash } from "@tabler/icons-react";
 
@@ -14,6 +15,9 @@ interface IProps {
 
 const TaskCard = ({ task }: IProps) => {
   const dispatch = useAppDispatch();
+  const users = useAppSelector(selectUsers);
+
+  const assignedUser = users.find((user) => user.id === task.assignedTo);
   return (
     <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex justify-between gap-6">
       <a href="#">
@@ -29,6 +33,7 @@ const TaskCard = ({ task }: IProps) => {
             {task.title}
           </h5>
         </div>
+        <p>Assigned by {assignedUser ? assignedUser.name : "No one"}</p>
         <p className="font-normal text-gray-700 dark:text-gray-400">
           {task?.description}
         </p>
@@ -41,7 +46,7 @@ const TaskCard = ({ task }: IProps) => {
         <input
           type="checkbox"
           checked={task.isCompleted}
-          onClick={() => dispatch(toggleCompletedState(task.id))}
+          onChange={() => dispatch(toggleCompletedState(task.id))}
         />
       </div>
     </div>
