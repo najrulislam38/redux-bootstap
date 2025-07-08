@@ -15,7 +15,7 @@ interface IProps {
 const TaskCard = ({ task }: IProps) => {
   const dispatch = useAppDispatch();
   return (
-    <div className=" max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex justify-between gap-6">
+    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex justify-between gap-6">
       <a href="#">
         <div className="flex gap-3 items-center">
           <div
