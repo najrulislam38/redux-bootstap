@@ -25,21 +25,24 @@ import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { format } from "date-fns";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { addTask } from "@/redux/features/task/taskSlice";
-import type { ITask } from "@/types";
-import { selectUsers } from "@/redux/features/user/userSlice";
 import { useState } from "react";
+import { useCreateTaskMutation } from "@/redux/api/baseApi";
 
 export function AddTaskModel() {
   const [open, setOpen] = useState(false);
-  const users = useAppSelector(selectUsers);
   const form = useForm();
-  const dispatch = useAppDispatch();
+
+  const [createTask, { data }] = useCreateTaskMutation();
+
+  console.log(data);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // console.log(data);
-    dispatch(addTask(data as ITask));
+    const taskData = { ...data, isCompleted: false };
+    // const res = createTask(taskData);
+    // console.log("inside submit ", res);
+    console.log(taskData);
+    createTask(taskData);
+
     setOpen(false);
   };
   return (
@@ -99,35 +102,9 @@ export function AddTaskModel() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="Low">Low</SelectItem>
-                        <SelectItem value="Medium">Medium</SelectItem>
-                        <SelectItem value="High">High</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="assignedTo"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Assigned To</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select the assigned user" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {users?.map((user, index) => (
-                          <SelectItem key={index} value={user.id}>
-                            {user?.name}
-                          </SelectItem>
-                        ))}
+                        <SelectItem value="low">Low</SelectItem>
+                        <SelectItem value="medium">Medium</SelectItem>
+                        <SelectItem value="high">High</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormItem>

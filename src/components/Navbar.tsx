@@ -8,10 +8,10 @@ const Navbar = () => {
       path: "/tasks",
       name: "Tasks",
     },
-    {
-      path: "/users",
-      name: "Users",
-    },
+    // {
+    //   path: "/users",
+    //   name: "Users",
+    // },
   ];
   return (
     <div className="max-w-7xl mx-auto py-3 flex items-center justify-between">
