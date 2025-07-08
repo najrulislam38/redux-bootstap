@@ -1,5 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import {
+  deleteTask,
+  toggleCompletedState,
+} from "@/redux/features/task/taskSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import type { ITask } from "@/types";
 import { IconTrash } from "@tabler/icons-react";
 
@@ -8,6 +13,7 @@ interface IProps {
 }
 
 const TaskCard = ({ task }: IProps) => {
+  const dispatch = useAppDispatch();
   return (
     <div className=" max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex justify-between gap-6">
       <a href="#">
@@ -27,11 +33,16 @@ const TaskCard = ({ task }: IProps) => {
           {task?.description}
         </p>
       </a>
+
       <div className="flex flex-col gap-2">
-        <Button>
+        <Button onClick={() => dispatch(deleteTask(task.id))}>
           <IconTrash />
         </Button>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={task.isCompleted}
+          onClick={() => dispatch(toggleCompletedState(task.id))}
+        />
       </div>
     </div>
   );
